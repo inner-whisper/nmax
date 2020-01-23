@@ -1,25 +1,28 @@
+require:
+  - rubocop-rspec
+
 inherit_from: .rubocop_todo.yml
 
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment, AllowBeforeTrailingComments, ForceEqualSignAlignment.
 Layout/ExtraSpacing:
-  Enable: true
+  Enabled: true
 
 # Cop supports --auto-correct.
 # Configuration parameters: AllowForAlignment, EnforcedStyleForExponentOperator.
 # SupportedStylesForExponentOperator: space, no_space
 Layout/SpaceAroundOperators:
-  Enable: true
+  Enabled: true
 
 # Cop supports --auto-correct.
 Style/ExpandPathArguments:
-  Enable: true
+  Enabled: true
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: always, never
 Style/FrozenStringLiteralComment:
-  Enable: true
+  Enabled: true
 
 # Cop supports --auto-correct.
 # Configuration parameters: UseHashRocketsWithSymbolValues, PreferHashRocketsForNonAlnumEndingSymbols.
@@ -31,10 +34,10 @@ Style/HashSyntax:
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: literals, strict
 Style/MutableConstant:
-  Enable: true
+  Enabled: true
 
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
-  Enable: true
+  Enabled: true

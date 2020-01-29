@@ -5,7 +5,5 @@ RSpec.describe 'nmax CLI', type: :aruba do
     run_command 'nmax'
   end
 
-  context 'returns output' do
-    it { expect(last_command_started).to have_output 'Hello world' }
-  end
+  it { expect(last_command_started).to have_output 'Hello world' }
 end

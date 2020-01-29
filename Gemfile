@@ -6,7 +6,12 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake', '~> 12.0'
-gem 'rspec', '~> 3.0'
+
+# Testing
+gem 'aruba', require: false
+gem 'rspec', '~> 3.0', require: false
+
+# Style Checking
 gem 'rubocop', require: false
 gem 'rubocop-performance', require: false
 gem 'rubocop-rspec', require: false

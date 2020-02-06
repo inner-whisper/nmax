@@ -42,3 +42,7 @@ Style/MutableConstant:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
   Enabled: true
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/features/**/*.rb'

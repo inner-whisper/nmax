@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'nmax'
+require 'aruba/rspec'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

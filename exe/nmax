@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-puts 'Hello world'
+puts STDIN.gets
 
 # $LOAD_PATH.unshift("#{__dir__}/../lib")
 

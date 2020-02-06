@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+cat ../../spec/features/files/example_data.txt | nmax 10000

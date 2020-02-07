@@ -5,5 +5,10 @@ RSpec.describe 'nmax CLI', type: :aruba do
     run_command 'spec/features/files/cli_test'
   end
 
-  it { expect(last_command_started).to have_output 'Hey, honey!' }
+  it 'returns content of file' do
+    output =
+      "If my honey comes back, sometime\nI'm gonna rap that jack, sometimes"
+
+    expect(last_command_started).to have_output output
+  end
 end

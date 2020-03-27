@@ -15,3 +15,6 @@ gem 'rspec', '~> 3.0', require: false
 gem 'rubocop', require: false
 gem 'rubocop-performance', require: false
 gem 'rubocop-rspec', require: false
+
+# Debugging
+gem 'pry', require: false

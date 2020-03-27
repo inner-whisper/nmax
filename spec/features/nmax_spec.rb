@@ -5,9 +5,8 @@ RSpec.describe 'nmax CLI', type: :aruba do
     run_command 'spec/features/files/cli_test'
   end
 
-  it 'returns content of file' do
-    output =
-      "If my honey comes back, sometime\nI'm gonna rap that jack, sometimes"
+  it 'returns numbers from file' do
+    output = "123\n4251241\n1223\n52323\n2534342"
 
     expect(last_command_started).to have_output output
   end

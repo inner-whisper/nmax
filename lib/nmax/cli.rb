@@ -6,7 +6,10 @@ module Nmax
     def run
       n = 2
       text = STDIN.read
-      text.scan(/\d+/)[0..(n - 1)].join("\n")
+
+      numbers_from_text = text.scan(/\d+/).map(&:to_i)
+      max_numbers_from_text = numbers_from_text.max(n)
+      max_numbers_from_text.join("\n")
     end
   end
 end

@@ -46,3 +46,7 @@ Style/StringLiterals:
 RSpec/DescribeClass:
   Exclude:
     - 'spec/features/**/*.rb'
+
+# Configuration parameters: AggregateFailuresByDefault.
+RSpec/MultipleExpectations:
+  Enabled: false

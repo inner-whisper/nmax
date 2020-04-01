@@ -4,7 +4,7 @@
 require 'nmax'
 
 cli = Nmax::CLI.new
-puts cli.run
+cli.run
 
 # $LOAD_PATH.unshift("#{__dir__}/../lib")
 

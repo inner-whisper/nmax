@@ -4,7 +4,7 @@ module Nmax
   # This class is responsible for command line interface logic
   class CLI
     def run
-      n = 2
+      n = ARGV[0].to_i
       text = STDIN.read
 
       numbers_from_text = text.scan(/\d+/).map(&:to_i)

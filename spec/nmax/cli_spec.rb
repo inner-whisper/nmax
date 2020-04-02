@@ -4,7 +4,9 @@ require 'spec_helper'
 
 RSpec.describe Nmax::CLI do
   describe '#run' do
-    let(:argv_stub) { ['2'] }
+    let(:argv_stub) { [n_arg] }
+    let(:n_arg) { '2' }
+    let(:not_positive_n_arg_message) { 'Атрибут N должен быть больше нуля. Прочитайте --help для справки' }
 
     before do
       io = StringIO.new
@@ -18,17 +20,37 @@ RSpec.describe Nmax::CLI do
       expect { described_class.new.run }.to output("12312\n225\n").to_stdout
     end
 
-    context 'when ARGV is empty' do
-      let(:argv_stub) { [] }
-
+    shared_examples 'an aborted script with error message' do
       include_context 'with suppressed stderr and stdout'
 
       it 'returns warning message and error code' do
-        puts_output = 'В скрипт должен быть передан атрибут N. Прочитайте --help для справки'
-
-        expect { described_class.new.run }.to raise_error(SystemExit, puts_output) do |error|
+        expect { described_class.new.run }.to raise_error(SystemExit, error_message) do |error|
           expect(error.status).to eq(1)
         end
+      end
+    end
+
+    context 'when ARGV is empty' do
+      let(:argv_stub) { [] }
+
+      it_behaves_like 'an aborted script with error message' do
+        let(:error_message) { 'В скрипт должен быть передан атрибут N. Прочитайте --help для справки' }
+      end
+    end
+
+    context 'when N is 0' do
+      let(:n_arg) { '0' }
+
+      it_behaves_like 'an aborted script with error message' do
+        let(:error_message) { not_positive_n_arg_message }
+      end
+    end
+
+    context 'when N is negative' do
+      let(:n_arg) { '-5' }
+
+      it_behaves_like 'an aborted script with error message' do
+        let(:error_message) { not_positive_n_arg_message }
       end
     end
   end

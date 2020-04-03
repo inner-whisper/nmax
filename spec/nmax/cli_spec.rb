@@ -6,7 +6,7 @@ RSpec.describe Nmax::CLI do
   describe '#run' do
     let(:argv_stub) { [n_arg] }
     let(:n_arg) { '2' }
-    let(:not_positive_n_arg_message) { 'Атрибут N должен быть больше нуля. Прочитайте --help для справки' }
+    let(:not_positive_n_arg_message) { 'Атрибут N должен быть больше нуля.' }
 
     before do
       io = StringIO.new
@@ -34,7 +34,7 @@ RSpec.describe Nmax::CLI do
       let(:argv_stub) { [] }
 
       it_behaves_like 'an aborted script with error message' do
-        let(:error_message) { 'В скрипт должен быть передан атрибут N. Прочитайте --help для справки' }
+        let(:error_message) { 'В скрипт должен быть передан атрибут N.' }
       end
     end
 

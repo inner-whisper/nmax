@@ -8,7 +8,6 @@ RSpec.describe 'nmax CLI', type: :aruba do
   end
 
   it 'returns numbers from file' do
-    # output = "123\n4251241\n1223\n52323\n2534342"
     output = "4251241\n2534342\n52323"
 
     expect(last_command_started).to be_successfully_executed
@@ -19,7 +18,7 @@ RSpec.describe 'nmax CLI', type: :aruba do
     let(:test_script_path) { 'spec/features/files/cli_test_error' }
 
     it 'returns error code and error message' do
-      output = 'В скрипт должен быть передан атрибут N. Прочитайте --help для справки'
+      output = 'В скрипт должен быть передан атрибут N.'
 
       expect(last_command_started).to have_exit_status(1)
       expect(last_command_started).to have_output output

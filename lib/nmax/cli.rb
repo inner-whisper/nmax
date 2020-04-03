@@ -4,7 +4,7 @@ module Nmax
   # This class is responsible for command line interface logic
   class CLI
     def run
-      validate_input
+      validate_argv
 
       text = STDIN.read
 
@@ -19,11 +19,9 @@ module Nmax
       @n_arg ||= ARGV[0].to_i
     end
 
-    def validate_input
-      help_string = 'Прочитайте --help для справки'
-
-      abort "В скрипт должен быть передан атрибут N. #{help_string}" if ARGV.empty?
-      abort "Атрибут N должен быть больше нуля. #{help_string}" if n_arg <= 0
+    def validate_argv
+      abort 'В скрипт должен быть передан атрибут N.' if ARGV.empty?
+      abort 'Атрибут N должен быть больше нуля.' if n_arg <= 0
     end
   end
 end

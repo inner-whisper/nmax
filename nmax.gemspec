@@ -28,4 +28,18 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'exe'
   spec.executables   = ['nmax'] # spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+
+  spec.add_development_dependency 'rake', '~> 12.0'
+
+  # Testing
+  spec.add_development_dependency 'aruba'
+  spec.add_development_dependency 'rspec', '~> 3.0'
+
+  # Style Checking
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-performance'
+  spec.add_development_dependency 'rubocop-rspec'
+
+  # Debugging
+  spec.add_development_dependency 'pry'
 end

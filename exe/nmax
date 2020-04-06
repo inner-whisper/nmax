@@ -1,11 +1,13 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-puts STDIN.gets
+require 'nmax'
+
+cli = Nmax::CLI.new
+cli.run
 
 # $LOAD_PATH.unshift("#{__dir__}/../lib")
 
-# require 'rubocop'
 # require 'benchmark'
 
 # cli = RuboCop::CLI.new

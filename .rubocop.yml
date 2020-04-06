@@ -43,6 +43,25 @@ Style/MutableConstant:
 Style/StringLiterals:
   Enabled: true
 
+# Cop supports --auto-correct.
+# Configuration parameters: MinSize, WordRegex.
+# SupportedStyles: percent, brackets
+Style/WordArray:
+  Enabled: true
+
+# Cop supports --auto-correct.
+# Configuration parameters: PreferredDelimiters.
+Style/PercentLiteralDelimiters:
+  Enabled: true
+  PreferredDelimiters:
+    # default: '[]'
+    # '%i':    '()'
+    '%w': '()'
+
 RSpec/DescribeClass:
   Exclude:
     - 'spec/features/**/*.rb'
+
+# Configuration parameters: AggregateFailuresByDefault.
+RSpec/MultipleExpectations:
+  Enabled: false

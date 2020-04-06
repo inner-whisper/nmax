@@ -21,6 +21,7 @@ module Nmax
 
     def validate_argv
       abort 'В скрипт должен быть передан атрибут N.' if ARGV.empty?
+      abort 'Скрипт поддерживает передачу только одного атрибута N.' if ARGV.size > 1
       abort 'Атрибут N должен быть больше нуля.' if n_arg <= 0
     end
   end

@@ -38,6 +38,14 @@ RSpec.describe Nmax::CLI do
       end
     end
 
+    context 'when ARGV has more than one argument' do
+      let(:argv_stub) { %w(1 2) }
+
+      it_behaves_like 'an aborted script with error message' do
+        let(:error_message) { 'Скрипт поддерживает передачу только одного атрибута N.' }
+      end
+    end
+
     context 'when N is 0' do
       let(:n_arg) { '0' }
 

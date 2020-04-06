@@ -7,11 +7,14 @@ RSpec.describe Nmax::CLI do
     let(:argv_stub) { [n_arg] }
     let(:n_arg) { '2' }
     let(:not_positive_n_arg_message) { 'Аргумент N должен быть числом, больше нуля.' }
+    let(:io) do
+      string_io = StringIO.new
+      string_io.puts "Smth new12\nBetter Than Others225\n123 12312"
+      string_io.rewind
+      string_io
+    end
 
     before do
-      io = StringIO.new
-      io.puts "Smth new12\nBetter Than Others225\n123 12312"
-      io.rewind
       stub_const('STDIN', io)
       stub_const('ARGV', argv_stub)
     end
@@ -67,6 +70,17 @@ RSpec.describe Nmax::CLI do
 
       it_behaves_like 'an aborted script with error message' do
         let(:error_message) { not_positive_n_arg_message }
+      end
+    end
+
+    context 'when STDIN has no any piped text stream' do
+      let(:io) { instance_double(StringIO, tty?: true) }
+
+      it_behaves_like 'an aborted script with error message' do
+        let(:error_message) do
+          'Входящий поток не содержит текстовых данных, пример использования скрипта:'\
+          ' `cat sample_data_40GB.txt | nmax 10000`'
+        end
       end
     end
   end

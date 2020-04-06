@@ -4,84 +4,28 @@ require 'spec_helper'
 
 RSpec.describe Nmax::CLI do
   describe '#run' do
-    let(:argv_stub) { [n_arg] }
-    let(:n_arg) { '2' }
-    let(:not_positive_n_arg_message) { 'Аргумент N должен быть числом, больше нуля.' }
+    let(:n_arg) { 2 }
     let(:io) do
       string_io = StringIO.new
       string_io.puts "Smth new12\nBetter Than Others225\n123 12312"
       string_io.rewind
       string_io
     end
+    let(:input_parser) { instance_double(Nmax::CLI::InputParser, validate: nil, n_arg: n_arg) }
+    let(:cli_run) { described_class.new(input_parser).run }
 
     before do
       stub_const('STDIN', io)
-      stub_const('ARGV', argv_stub)
     end
 
     it 'returns all numbers from STDIN' do
-      expect { described_class.new.run }.to output("12312\n225\n").to_stdout
+      expect { cli_run }.to output("12312\n225\n").to_stdout
     end
 
-    shared_examples 'an aborted script with error message' do
-      include_context 'with suppressed stderr and stdout'
+    it 'calls input parser validator' do
+      cli_run
 
-      it 'returns warning message and error code' do
-        expect { described_class.new.run }.to raise_error(SystemExit, error_message) do |error|
-          expect(error.status).to eq(1)
-        end
-      end
-    end
-
-    context 'when ARGV is empty' do
-      let(:argv_stub) { [] }
-
-      it_behaves_like 'an aborted script with error message' do
-        let(:error_message) { 'В скрипт должен быть передан аргумент N.' }
-      end
-    end
-
-    context 'when ARGV has more than one argument' do
-      let(:argv_stub) { %w(1 2) }
-
-      it_behaves_like 'an aborted script with error message' do
-        let(:error_message) { 'Скрипт поддерживает передачу только одного аргумента N.' }
-      end
-    end
-
-    context 'when N is 0' do
-      let(:n_arg) { '0' }
-
-      it_behaves_like 'an aborted script with error message' do
-        let(:error_message) { not_positive_n_arg_message }
-      end
-    end
-
-    context 'when N is negative' do
-      let(:n_arg) { '-5' }
-
-      it_behaves_like 'an aborted script with error message' do
-        let(:error_message) { not_positive_n_arg_message }
-      end
-    end
-
-    context 'when N is not a number' do
-      let(:n_arg) { 'minus_five' }
-
-      it_behaves_like 'an aborted script with error message' do
-        let(:error_message) { not_positive_n_arg_message }
-      end
-    end
-
-    context 'when STDIN has no any piped text stream' do
-      let(:io) { instance_double(StringIO, tty?: true) }
-
-      it_behaves_like 'an aborted script with error message' do
-        let(:error_message) do
-          'Входящий поток не содержит текстовых данных, пример использования скрипта:'\
-          ' `cat sample_data_40GB.txt | nmax 10000`'
-        end
-      end
+      expect(input_parser).to have_received(:validate)
     end
   end
 end

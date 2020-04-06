@@ -18,7 +18,7 @@ RSpec.describe 'nmax CLI', type: :aruba do
     let(:test_script_path) { 'spec/features/files/cli_test_error' }
 
     it 'returns error code and error message' do
-      output = 'В скрипт должен быть передан атрибут N.'
+      output = 'В скрипт должен быть передан аргумент N.'
 
       expect(last_command_started).to have_exit_status(1)
       expect(last_command_started).to have_output output

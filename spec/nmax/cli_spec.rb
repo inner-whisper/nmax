@@ -3,12 +3,7 @@
 RSpec.describe Nmax::CLI do
   describe '#run' do
     let(:n_arg) { 2 }
-    let(:io) do
-      string_io = StringIO.new
-      string_io.puts "Smth new12\nBetter Than Others225\n123 12312"
-      string_io.rewind
-      string_io
-    end
+    let(:io) { StringIO.new "Smth new12\nBetter Than Others225\n123 12312" }
     let(:input_parser) { instance_double(Nmax::CLI::InputParser, validate: nil, n_arg: n_arg) }
     let(:cli_run) { described_class.new(input_parser: input_parser).run }
 

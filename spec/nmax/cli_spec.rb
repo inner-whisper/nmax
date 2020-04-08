@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Nmax::CLI do
   describe '#run' do
     let(:n_arg) { 2 }
@@ -12,11 +10,13 @@ RSpec.describe Nmax::CLI do
       string_io
     end
     let(:input_parser) { instance_double(Nmax::CLI::InputParser, validate: nil, n_arg: n_arg) }
-    let(:cli_run) { described_class.new(input_parser).run }
+    let(:cli_run) { described_class.new(input_parser: input_parser).run }
 
     before do
       stub_const('STDIN', io)
     end
+
+    include_context 'with suppressed stderr and stdout'
 
     it 'returns all numbers from STDIN' do
       expect { cli_run }.to output("12312\n225\n").to_stdout

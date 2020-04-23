@@ -13,14 +13,7 @@ module Nmax
     def run
       input_parser.validate
 
-      puts number_filter.max_numbers_from_io(io: STDIN, numbers_count: n_arg).join("\n")
-    end
-
-    private
-
-    # TODO: переделать на делегирование
-    def n_arg
-      @n_arg ||= input_parser.n_arg
+      puts number_filter.max_numbers_from_io(io: STDIN, numbers_count: input_parser.n_arg).join("\n")
     end
   end
 end

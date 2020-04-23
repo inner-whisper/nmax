@@ -5,28 +5,26 @@ module Nmax
   class InversedSortedCollection
     attr_reader :array, :length_limit
 
-    def initialize(array:, length_limit:)
+    def initialize(array: [], length_limit:)
       @length_limit = length_limit
       @array = array.sort.reverse.first(length_limit)
     end
 
     def <<(value)
-      insert_value_in_array(value)
+      array.insert(index_to_insert(value), value)
 
       array.pop if array.size > length_limit
     end
 
     private
 
-    def insert_value_in_array(value)
-      if value >= array.first
-        array.unshift(value)
-      elsif value <= array.last
-        array << value
+    def index_to_insert(value)
+      if array.empty? || value <= array.last
+        -1
+      elsif value >= array.first
+        0
       else
-        index = array.bsearch_index { |el| el <= value }
-
-        array.insert(index, value)
+        array.bsearch_index { |el| el <= value }
       end
     end
   end

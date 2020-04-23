@@ -3,12 +3,15 @@
 module Nmax
   # This class is responsible for filtering numbers from text stream
   class NumberFilter
-    attr_writer :current_number_string, :numbers_from_text
+    attr_writer :current_number_string
+    attr_reader :numbers_from_text
 
     def max_numbers_from_io(io:, numbers_count:)
+      @numbers_from_text = InversedSortedCollection.new(length_limit: numbers_count)
+
       filter_numbers_from_io(io)
 
-      numbers_from_text.max(numbers_count)
+      numbers_from_text.array
     end
 
     private
@@ -27,10 +30,6 @@ module Nmax
 
     def current_number_string
       @current_number_string ||= ''
-    end
-
-    def numbers_from_text
-      @numbers_from_text ||= []
     end
 
     def integer?(char)

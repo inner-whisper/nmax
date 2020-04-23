@@ -19,7 +19,8 @@ RSpec.describe Nmax::InversedSortedCollection do
 
   describe '#<<' do
     let(:length_limit) { 6 }
-    let(:collection) { described_class.new(array: [10, 5, 2, 1], length_limit: length_limit) }
+    let(:input_array) { [10, 5, 2, 1] }
+    let(:collection) { described_class.new(array: input_array, length_limit: length_limit) }
     let(:array) { collection.array }
 
     before do
@@ -67,6 +68,13 @@ RSpec.describe Nmax::InversedSortedCollection do
       let(:length_limit) { 4 }
 
       it { expect(array).to eq([10, 5, 5, 2]) }
+    end
+
+    context 'when input_array is empty' do
+      let(:input_array) { [] }
+      let(:added_value) { 5 }
+
+      it { expect(array).to eq([5]) }
     end
   end
 end

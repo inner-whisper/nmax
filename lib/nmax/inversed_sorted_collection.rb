@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Nmax
-  # This class is responsible for handling constrained by length sorted array
+  # This class is responsible for handling sorted array, constrained by length
   class InversedSortedCollection
     attr_reader :array, :length_limit
 

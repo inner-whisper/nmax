@@ -17,6 +17,10 @@ module Nmax
     private
 
     def filter_numbers_from_io(io)
+      # это работает быстрее на маленьких файлах, тест:
+      # time bash -c 'cat /Users/innerwhisper/Projects/itpard/theater_tickets/log/test.log | bundle exec exe/nmax 1000'
+      # io.read.scan(/\d+/) { |w| numbers_from_text << w.to_i }
+
       io.each_char do |char|
         if integer?(char)
           self.current_number_string = current_number_string + char

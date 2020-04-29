@@ -19,15 +19,16 @@ module Nmax
     def filter_numbers_from_io(io)
       # это работает быстрее на маленьких файлах, тест:
       # time bash -c 'cat /Users/innerwhisper/Projects/itpard/theater_tickets/log/test.log | bundle exec exe/nmax 1000'
-      # io.read.scan(/\d+/) { |w| numbers_from_text << w.to_i }
+      # 12.91s - io.read.scan(/\d+/) { |w| numbers_from_text << w.to_i }
 
+      # 16.08s - io.each(1000000000000000000) do { |chunk| chunk.scan(/\d+/) { |number| numbers_from_text << number.to_i } }
+
+      # 19.01s
       prev_number = nil
       chunk_number = nil
 
       io.each(1000) do |chunk|
         chunk.scan(/\d+/) do |number|
-          # numbers_from_text << number.to_i
-
           unless chunk_number.nil?
             number += chunk_number
             chunk_number = nil

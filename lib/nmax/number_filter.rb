@@ -3,6 +3,8 @@
 module Nmax
   # This class is responsible for filtering numbers from text stream
   class NumberFilter
+    BUFFER_SIZE = 1000
+
     attr_writer :current_number_string
     attr_reader :numbers_from_text
 
@@ -24,13 +26,22 @@ module Nmax
       # 16.08s - io.each(1000000000000000000) do { |chunk| chunk.scan(/\d+/) { |number| numbers_from_text << number.to_i } }
 
       # 19.01s
+
+      # require 'pry'
+      # binding.pry
+
       prev_number = nil
       chunk_number = nil
 
-      io.each(1000) do |chunk|
+      io.each(BUFFER_SIZE) do |chunk|
+        unless integer?(chunk[0])
+          prev_number = chunk_number
+          chunk_number = nil
+        end
+
         chunk.scan(/\d+/) do |number|
           unless chunk_number.nil?
-            number += chunk_number
+            number = chunk_number + number
             chunk_number = nil
           end
 
@@ -45,13 +56,13 @@ module Nmax
           chunk_number = prev_number
         else
           numbers_from_text << prev_number.to_i
-          prev_number = nil
-          chunk_number = nil
         end
+
+        prev_number = nil
       end
 
-      unless prev_number.nil?
-        numbers_from_text << prev_number.to_i
+      unless chunk_number.nil?
+        numbers_from_text << chunk_number.to_i
       end
 
       # io.each_char do |char|

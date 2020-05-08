@@ -49,5 +49,13 @@ RSpec.describe Nmax::NumberFilter do
 
       it_behaves_like 'a correct filter'
     end
+
+    context 'when the beginning of the number is in the beginning of buffered chunk' do
+      let(:io_content_beginning) { 'abcd123121356' }
+      let(:buffer_size) { 4 }
+      let(:output) { [123_121_356, 12_312] }
+
+      it_behaves_like 'a correct filter'
+    end
   end
 end

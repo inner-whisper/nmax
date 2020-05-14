@@ -15,6 +15,10 @@ Layout/ExtraSpacing:
 Layout/SpaceAroundOperators:
   Enabled: true
 
+# Configuration parameters: AllowedChars.
+Style/AsciiComments:
+  Enabled: false
+
 # Cop supports --auto-correct.
 Style/ExpandPathArguments:
   Enabled: true

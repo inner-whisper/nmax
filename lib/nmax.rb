@@ -3,8 +3,9 @@
 require 'nmax/version'
 require 'nmax/cli'
 require 'nmax/cli/input_parser'
+require 'nmax/number_filter'
+require 'nmax/inversed_sorted_collection'
 
+# This is the top level module of gem
 module Nmax
-  class Error < StandardError; end
-  # Your code goes here...
 end

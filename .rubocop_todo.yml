@@ -17,12 +17,6 @@ RSpec/ExpectOutput:
   Exclude:
     - 'spec/support/shared_contexts/suppressing_stdout_and_stderr.rb'
 
-# Offense count: 2
-# Configuration parameters: AllowedChars.
-Style/AsciiComments:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
 # Offense count: 12
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.

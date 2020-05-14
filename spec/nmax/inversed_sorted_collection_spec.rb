@@ -1,0 +1,80 @@
+# frozen_string_literal: true
+
+RSpec.describe Nmax::InversedSortedCollection do
+  describe '.new' do
+    let(:input_array) { [2, 10, 1, 5] }
+    let(:length_limit) { 6 }
+    let(:array) { described_class.new(array: input_array, length_limit: length_limit).array }
+
+    it 'sorts array' do
+      expect(array).to eq([10, 5, 2, 1])
+    end
+
+    context 'when length_limit is smaller than length of array' do
+      let(:length_limit) { input_array.size - 2 }
+
+      it { expect(array).to eq([10, 5]) }
+    end
+  end
+
+  describe '#<<' do
+    let(:length_limit) { 6 }
+    let(:input_array) { [10, 5, 2, 1] }
+    let(:collection) { described_class.new(array: input_array, length_limit: length_limit) }
+    let(:array) { collection.array }
+
+    before do
+      collection << added_value
+    end
+
+    context 'when added_value is in the middle of collection' do
+      let(:added_value) { 3 }
+
+      it { expect(array).to eq([10, 5, 3, 2, 1]) }
+    end
+
+    context 'when added_value is in the beginning of collection' do
+      let(:added_value) { -1 }
+
+      it { expect(array).to eq([10, 5, 2, 1, -1]) }
+    end
+
+    context 'when added_value is in the end of collection' do
+      let(:added_value) { 20 }
+
+      it { expect(array).to eq([20, 10, 5, 2, 1]) }
+    end
+
+    context 'when added_value is equal to collection minimum' do
+      let(:added_value) { 1 }
+
+      it { expect(array).to eq([10, 5, 2, 1, 1]) }
+    end
+
+    context 'when added_value is equal to collection maximum' do
+      let(:added_value) { 10 }
+
+      it { expect(array).to eq([10, 10, 5, 2, 1]) }
+    end
+
+    context 'when added_value is equal to any value in the middle of collection' do
+      let(:added_value) { 5 }
+
+      it { expect(array).to eq([10, 5, 5, 2, 1]) }
+    end
+
+    context 'when length is constrained' do
+      let(:added_value) { 5 }
+      let(:length_limit) { 4 }
+
+      it { expect(array).to eq([10, 5, 5, 2]) }
+    end
+
+    context 'when input_array is empty' do
+      let(:input_array) { [] }
+      let(:added_value) { 5 }
+
+      it { expect(array).to eq([5]) }
+    end
+  end
+end

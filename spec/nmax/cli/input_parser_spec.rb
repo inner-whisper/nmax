@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Nmax::CLI::InputParser do
   describe '#validate' do
     let(:argv_stub) { [n_arg] }

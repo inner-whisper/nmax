@@ -18,16 +18,23 @@ module Nmax
 
     private
 
+    # Немного о производительности данного метода
+    # Данные о времени приведены с использованием следующего бенчмарка
+    # time bash -c 'cat /Users/innerwhisper/Projects/itpard/theater_tickets/log/test.log | bundle exec exe/nmax 1000'
+
+    # самый быстрый способ, но выгружает весь файл целиком в RAM
+    # 13.59s - 300 Mb file
+    # io.read.scan(/\d+/) { |w| numbers_from_text << w.to_i }
+
+    # возможный потолок для оптимизации для IO.each (можно рассмотреть, если входящий поток точно разбит на строки)
+    # 16.89s - 300 Mb file
+    # 1497 s - 20GB file
+    # io.each(1000000) { |chunk| chunk.scan(/\d+/) { |number| numbers_from_text << number.to_i } }
+
+    # Текущая реализация
+    # 22.76s - 300 Mb file
+    # 2080 s - 20 GB file
     def filter_numbers_from_io(io)
-      # time bash -c 'cat /Users/innerwhisper/Projects/itpard/theater_tickets/log/test.log | bundle exec exe/nmax 1000'
-
-      # 13.59s - самый быстрый способ, но выгружает весь файл целиком в RAM
-      # io.read.scan(/\d+/) { |w| numbers_from_text << w.to_i }
-
-      # 16.89s - возможный потолок для оптимизации для IO.each
-      # io.each(1000000000000000000) { |chunk| chunk.scan(/\d+/) { |number| numbers_from_text << number.to_i } }
-
-      # 22.76s
       io.each(BUFFER_SIZE) do |chunk|
         handle_chunk(chunk)
       end

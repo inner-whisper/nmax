@@ -5,17 +5,3 @@ require 'nmax'
 
 cli = Nmax::CLI.new
 cli.run
-
-# $LOAD_PATH.unshift("#{__dir__}/../lib")
-
-# require 'benchmark'
-
-# cli = RuboCop::CLI.new
-# result = 0
-
-# time = Benchmark.realtime do
-#   result = cli.run
-# end
-
-# puts "Finished in #{time} seconds" if cli.options[:debug]
-# exit result

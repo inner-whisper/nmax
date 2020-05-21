@@ -4,7 +4,6 @@ cache: bundler
 rvm:
   - 2.7.0
   - jruby
-  - rbx
 before_install: gem install bundler -v 2.1.2
 script:
   - bundle exec rubocop

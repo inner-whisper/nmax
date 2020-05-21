@@ -6,20 +6,23 @@ This gem is a text input analyzer. It filters, sorts, and outputs integers from 
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone this gem to your machine.
 
-```ruby
-gem 'nmax', github: 'inner-whisper/nmax'
+Then `cd` into cloned folder, build gem and install locally:
+
+```sh
+cd /path/to/gem
+
+gem build nmax.gemspec
+
+gem install --local nmax-0.1.0.gem
 ```
-
-And then execute:
-
-    $ bundle install
 
 ## Usage
 
-TODO: Write usage instructions here
+Script accepts data via standard input and use one argument to limit count of numbers in output (`10000` in example below).
 
+    $ cat sample_data_40GB.txt | nmax 10000
 
 ## Development
 

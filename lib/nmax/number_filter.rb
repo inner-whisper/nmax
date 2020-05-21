@@ -20,7 +20,7 @@ module Nmax
 
     # Немного о производительности данного метода
     # Данные о времени приведены с использованием следующего бенчмарка
-    # time bash -c 'cat /Users/innerwhisper/Projects/itpard/theater_tickets/log/test.log | bundle exec exe/nmax 1000'
+    # time bash -c 'cat /path/to/test/file | bundle exec exe/nmax 1000'
 
     # самый быстрый способ, но выгружает весь файл целиком в RAM
     # 13.59s - 300 Mb file

@@ -2,7 +2,7 @@
 
 # Nmax
 
-This gem is a text input analyzer. It filters, sorts, and outputs integers from STDIN.
+Nmax is a text input analyzer. It filters, sorts, and outputs integers from STDIN.
 
 ## Installation
 

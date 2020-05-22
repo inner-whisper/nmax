@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
 
   # Style Checking
   spec.add_development_dependency 'rubocop', '~> 0.79'
+  spec.add_development_dependency 'rubocop-md', '~> 0.3'
   spec.add_development_dependency 'rubocop-performance', '~> 1.5'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.37'
 

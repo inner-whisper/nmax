@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['maks.rydkin@gmail.com']
 
   spec.summary       = 'Проект содержит скрипт, позволяющий извлечь N самых больших целых чисел из потока входных данных'
-  spec.description   = spec.summary
+  spec.description   = spec.summary + "Подробности - на #{spec.homepage}"
   spec.homepage      = 'https://github.com/inner-whisper/nmax'
   spec.license       = 'MIT'
   spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
@@ -32,14 +32,14 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 12.0'
 
   # Testing
-  spec.add_development_dependency 'aruba'
+  spec.add_development_dependency 'aruba', '~> 0.14'
   spec.add_development_dependency 'rspec', '~> 3.0'
 
   # Style Checking
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'rubocop-performance'
-  spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'rubocop', '~> 0.79'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.5'
+  spec.add_development_dependency 'rubocop-rspec', '~> 1.37'
 
   # Debugging
-  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'pry', '~> 0.13'
 end

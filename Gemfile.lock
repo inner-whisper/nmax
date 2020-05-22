@@ -91,14 +91,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aruba
+  aruba (~> 0.14)
   nmax!
-  pry
+  pry (~> 0.13)
   rake (~> 12.0)
   rspec (~> 3.0)
-  rubocop
-  rubocop-performance
-  rubocop-rspec
+  rubocop (~> 0.79)
+  rubocop-performance (~> 1.5)
+  rubocop-rspec (~> 1.37)
 
 BUNDLED WITH
    2.1.4

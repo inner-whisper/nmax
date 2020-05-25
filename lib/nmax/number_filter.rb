@@ -5,9 +5,11 @@ module Nmax
   class NumberFilter
     BUFFER_SIZE = 1000
 
-    attr_reader :numbers_from_text
-    attr_accessor :previous_number, :previous_chunk_buffer
-
+    # Filters input IO object and returns sorted array of biggest numbers from it
+    #
+    # @param io [IO] IO object to filter
+    # @param numbers_count [Integer] size of the output array
+    # @return [Array] biggest numbers from IO in sorted order
     def max_numbers_from_io(io:, numbers_count:)
       @numbers_from_text = InversedSortedCollection.new(length_limit: numbers_count)
 
@@ -18,19 +20,22 @@ module Nmax
 
     private
 
+    attr_reader :numbers_from_text
+    attr_accessor :previous_number, :previous_chunk_buffer
+
     # Немного о производительности данного метода
     # Данные о времени приведены с использованием следующего бенчмарка
     # time bash -c 'cat /path/to/test/file | bundle exec exe/nmax 1000'
-
-    # самый быстрый способ, но выгружает весь файл целиком в RAM
+    #
+    # Самый быстрый способ, но выгружает весь файл целиком в RAM
     # 13.59s - 300 Mb file
     # io.read.scan(/\d+/) { |w| numbers_from_text << w.to_i }
-
-    # возможный потолок для оптимизации для IO.each (можно рассмотреть, если входящий поток точно разбит на строки)
+    #
+    # Возможный потолок для оптимизации для IO.each (можно рассмотреть, если входящий поток точно разбит на строки)
     # 16.89s - 300 Mb file
     # 1497 s - 20GB file
     # io.each(1000000) { |chunk| chunk.scan(/\d+/) { |number| numbers_from_text << number.to_i } }
-
+    #
     # Текущая реализация
     # 22.76s - 300 Mb file
     # 2080 s - 20 GB file
@@ -85,6 +90,7 @@ module Nmax
     end
 
     def integer?(char)
+      # Данный способ выбран как оптимальный на основании https://stackoverflow.com/a/19849955
       char.to_i.to_s == char
     end
   end

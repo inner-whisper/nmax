@@ -4,7 +4,8 @@ RSpec.describe Nmax::InversedSortedCollection do
   describe '.new' do
     let(:input_array) { [2, 10, 1, 5] }
     let(:length_limit) { 6 }
-    let(:array) { described_class.new(array: input_array, length_limit: length_limit).array }
+    let(:collection) { described_class.new(array: input_array, length_limit: length_limit) }
+    let(:array) { collection.array }
 
     it 'sorts array' do
       expect(array).to eq([10, 5, 2, 1])
@@ -13,7 +14,27 @@ RSpec.describe Nmax::InversedSortedCollection do
     context 'when length_limit is smaller than length of array' do
       let(:length_limit) { input_array.size - 2 }
 
-      it { expect(array).to eq([10, 5]) }
+      it 'limits array by length' do
+        expect(array).to eq([10, 5])
+      end
+    end
+
+    context 'when length_limit is String' do
+      let(:length_limit) { 'asd' }
+
+      it { expect { collection }.to raise_error ArgumentError }
+    end
+
+    context 'when input_array is a String with number' do
+      let(:input_array) { '123' }
+
+      it { expect(array).to eq([123]) }
+    end
+
+    context 'when input_array is a String with word symbols' do
+      let(:input_array) { 'abs' }
+
+      it { expect { collection }.to raise_error ArgumentError }
     end
   end
 

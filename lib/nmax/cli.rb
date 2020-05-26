@@ -10,6 +10,7 @@ module Nmax
       @number_filter = number_filter
     end
 
+    # @return filtered numbers to STDOUT
     def run
       input_parser.validate
 

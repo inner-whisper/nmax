@@ -3,6 +3,7 @@
 module Nmax
   # This class is responsible for filtering numbers from text stream
   class NumberFilter
+    # Size in chars of IO reading buffer
     BUFFER_SIZE = 1000
 
     # Filters input IO object and returns sorted array of biggest numbers from it

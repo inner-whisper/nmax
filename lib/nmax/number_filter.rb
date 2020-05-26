@@ -32,7 +32,8 @@ module Nmax
     # 13.59s - 300 Mb file
     # io.read.scan(/\d+/) { |w| numbers_from_text << w.to_i }
     #
-    # Возможный потолок для оптимизации для IO.each (можно рассмотреть, если входящий поток точно разбит на строки)
+    # Возможный потолок для оптимизации для IO.each
+    # (можно рассмотреть, если входящий поток точно разбит на строки)
     # 16.89s - 300 Mb file
     # 1497 s - 20GB file
     # io.each(1000000) { |chunk| chunk.scan(/\d+/) { |number| numbers_from_text << number.to_i } }

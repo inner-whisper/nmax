@@ -8,7 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Maxim Rydkin']
   spec.email         = ['maks.rydkin@gmail.com']
 
-  spec.summary       = 'Проект содержит скрипт, позволяющий извлечь N самых больших целых чисел из потока входных данных'
+  spec.summary       = 'Проект содержит скрипт, позволяющий извлечь N самых больших целых чисел'\
+                       ' из потока входных данных'
   spec.description   = spec.summary + "Подробности - на #{spec.homepage}"
   spec.homepage      = 'https://github.com/inner-whisper/nmax'
   spec.license       = 'MIT'

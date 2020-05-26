@@ -10,10 +10,12 @@ module Nmax
       @number_filter = number_filter
     end
 
+    # @return filtered numbers to STDOUT
     def run
       input_parser.validate
 
-      puts number_filter.max_numbers_from_io(io: STDIN, numbers_count: input_parser.n_arg).join("\n")
+      puts number_filter.max_numbers_from_io(io: STDIN, numbers_count: input_parser.n_arg)
+                        .join("\n")
     end
   end
 end

@@ -6,7 +6,13 @@ RSpec.describe Nmax::NumberFilter do
     let(:io_content_ending) { '' }
     let(:io_content_beginning) { '' }
     let(:buffer_size) { 15 }
-    let(:io_content) { io_content_beginning + "Smth new12\nBetter Than Others225\n123 12312" + io_content_ending }
+
+    let(:io_content) do
+      io_content_beginning +
+        "Smth new12\nBetter Than Others225\n123 12312" +
+        io_content_ending
+    end
+
     let(:io) { StringIO.new io_content }
     let(:output) { [12_312, 225] }
 
@@ -16,7 +22,9 @@ RSpec.describe Nmax::NumberFilter do
 
     shared_examples 'a correct filter' do
       it 'returns numbers_count numbers from io' do
-        expect(described_class.new.max_numbers_from_io(io: io, numbers_count: numbers_count)).to eq(output)
+        expect(
+          described_class.new.max_numbers_from_io(io: io, numbers_count: numbers_count)
+        ).to eq(output)
       end
     end
 

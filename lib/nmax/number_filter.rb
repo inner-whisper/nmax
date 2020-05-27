@@ -5,6 +5,8 @@ module Nmax
   class NumberFilter
     # Size in chars of IO reading buffer
     BUFFER_SIZE = 1000
+    # Regexp for filtering digits, limited by 1000 symbols (as described in requirements)
+    SCANNING_DIGITS_REGEXP = /\d{1,1000}/.freeze
 
     # Filters input IO object and returns sorted array of biggest numbers from it
     #
@@ -52,7 +54,7 @@ module Nmax
     def handle_chunk(chunk)
       handle_previous_chunk_buffer(chunk)
 
-      chunk.scan(/\d+/) do |number|
+      chunk.scan(SCANNING_DIGITS_REGEXP) do |number|
         handle_prev_number(number)
       end
 

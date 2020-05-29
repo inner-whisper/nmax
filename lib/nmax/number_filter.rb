@@ -37,18 +37,18 @@ module Nmax
     # Возможный потолок для оптимизации для IO.each
     # (можно рассмотреть, если входящий поток точно разбит на строки)
     # 16.89s - 300 Mb file
-    # 1497 s - 20GB file
+    # 1497s - 20GB file
     # io.each(1000000) { |chunk| chunk.scan(/\d+/) { |number| numbers_from_text << number.to_i } }
     #
     # Текущая реализация
     # 22.76s - 300 Mb file
-    # 2080 s - 20 GB file
+    # 2080s - 20 GB file
     def filter_numbers_from_io(io)
       io.each(BUFFER_SIZE) do |chunk|
         handle_chunk(chunk)
       end
 
-      numbers_from_text << previous_chunk_buffer.to_i unless previous_chunk_buffer.nil?
+      add_value_to_numbers_from_text(previous_chunk_buffer)
     end
 
     def handle_chunk(chunk)
@@ -74,7 +74,7 @@ module Nmax
         self.previous_chunk_buffer = nil
       end
 
-      add_prev_number_to_array unless previous_number.nil?
+      add_prev_number_to_array
 
       self.previous_number = number
     end
@@ -90,7 +90,13 @@ module Nmax
     end
 
     def add_prev_number_to_array
-      numbers_from_text << previous_number.to_i
+      add_value_to_numbers_from_text(previous_number)
+    end
+
+    def add_value_to_numbers_from_text(value)
+      return if value.nil?
+
+      numbers_from_text << value
     end
 
     def integer?(char)

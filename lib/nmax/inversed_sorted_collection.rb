@@ -17,9 +17,9 @@ module Nmax
     # Adds number to collection, sort collection and limit it by `length_limit` size
     # @param value [Integer] integer to add into collection
     def <<(value)
-      # TODO: Проверять Integer на входе через assert-ы (проверить влияние на производительность)
+      val = Integer(value)
 
-      array.insert(index_to_insert(value), value)
+      array.insert(index_to_insert(val), val)
 
       array.pop if array.size > length_limit
     end

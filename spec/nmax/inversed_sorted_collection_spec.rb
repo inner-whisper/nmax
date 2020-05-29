@@ -43,9 +43,10 @@ RSpec.describe Nmax::InversedSortedCollection do
     let(:input_array) { [10, 5, 2, 1] }
     let(:collection) { described_class.new(array: input_array, length_limit: length_limit) }
     let(:array) { collection.array }
+    let(:add_value_hook) { collection << added_value }
 
     before do
-      collection << added_value
+      add_value_hook
     end
 
     context 'when added_value is in the middle of collection' do
@@ -82,6 +83,19 @@ RSpec.describe Nmax::InversedSortedCollection do
       let(:added_value) { 5 }
 
       it { expect(array).to eq([10, 5, 5, 2, 1]) }
+    end
+
+    context 'when added_value is String, containing number' do
+      let(:added_value) { '5' }
+
+      it { expect(array).to eq([10, 5, 5, 2, 1]) }
+    end
+
+    context 'when added_value is String, does not containing number' do
+      let(:added_value) { 'abc' }
+      let(:add_value_hook) {}
+
+      it { expect { collection << added_value }.to raise_error ArgumentError }
     end
 
     context 'when length is constrained' do

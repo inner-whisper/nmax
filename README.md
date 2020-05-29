@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/inner-whisper/nmax.svg?branch=master)](https://travis-ci.com/inner-whisper/nmax)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/b366a878b1e429d22e02/maintainability)](https://codeclimate.com/github/inner-whisper/nmax/maintainability)
+
 # Nmax
 
 Nmax is a text input analyzer. It filters, sorts, and outputs integers from STDIN.

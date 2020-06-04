@@ -16,6 +16,13 @@ Layout/ExtraSpacing:
 Layout/SpaceAroundOperators:
   Enabled: true
 
+# Configuration parameters: CountComments, ExcludedMethods.
+# ExcludedMethods: refine
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+    - nmax.gemspec
+
 # Configuration parameters: AllowedChars.
 Style/AsciiComments:
   Enabled: false

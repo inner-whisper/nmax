@@ -31,6 +31,18 @@ RSpec.describe Nmax::InversedSortedCollection do
       it { expect(array).to eq([123]) }
     end
 
+    context 'when input_array is a String with number with leading zeros' do
+      let(:input_array) { '00123' }
+
+      it { expect(array).to eq([123]) }
+    end
+
+    context 'when input_array is a String with all zeros' do
+      let(:input_array) { '00000' }
+
+      it { expect(array).to eq([0]) }
+    end
+
     context 'when input_array is a String with word symbols' do
       let(:input_array) { 'abs' }
 
@@ -89,6 +101,18 @@ RSpec.describe Nmax::InversedSortedCollection do
       let(:added_value) { '5' }
 
       it { expect(array).to eq([10, 5, 5, 2, 1]) }
+    end
+
+    context 'when added_value is String, containing number with leading zeros' do
+      let(:added_value) { '00135' }
+
+      it { expect(array).to eq([135, 10, 5, 2, 1]) }
+    end
+
+    context 'when added_value is String with all zeros' do
+      let(:added_value) { '00000' }
+
+      it { expect(array).to eq([10, 5, 2, 1, 0]) }
     end
 
     context 'when added_value is String, does not containing number' do

@@ -5,6 +5,8 @@
 
 Nmax is a text input analyzer. It filters, sorts, and outputs integers from STDIN.
 
+More on purpose of this code [here](PROBLEM_DESCRIPTION.md)
+
 ## Installation
 
 Clone this gem to your machine.
